@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int coin_change(int coin[], int change, int k) {
+  int M[change+1];
+  M[0] = 0;
+
+  int i, j;
+  for(j=1; j<=change; j++) {
+    int minimum = 999;
+
+
+    for(i=0; i<k; i++) {
+      if(j >= coin[i]) {
+        if((1+M[j-coin[i]]) < minimum) {
+          minimum = 1+M[j-coin[i]];
+        }
+      }
+    }
+    M[j] = minimum;
+  }
+  return M[change];
+}
+
+int main() {
+  int coin[100];
+  int i,k,change;
+  printf("Total number of coins: ");
+  scanf("%d",&k);
+  printf("My coins: ");
+  for(i=0;i<k;i++)
+  {
+      scanf("%d",&coin[i]);
+  }
+  printf("Change: ");
+  scanf("%d",&change);
+  int z;
+  z = coin_change(coin, change, k);
+  printf("Coins Need: %d\n",z);
+
+  return 0;
+}
